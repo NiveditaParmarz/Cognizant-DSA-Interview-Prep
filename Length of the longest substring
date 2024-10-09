@@ -1,0 +1,47 @@
+Link: https://www.geeksforgeeks.org/problems/length-of-the-longest-substring3036/1
+
+Given a string S, find the length of the longest substring without repeating characters.
+
+
+Example 1:
+
+Input:
+S = "geeksforgeeks"
+Output:
+7
+Explanation:
+Longest substring is
+"eksforg".
+
+Code:
+
+class Solution{
+    int longestUniqueSubsttr(String S){
+        boolean visited[] = new boolean[256]; //we take a 256 length array to incorporate all possible characters
+        int right = 0;
+        int left = 0;
+        int maxlength = 0;
+        
+        if(S.length() == 0)return 0;
+        if(S.length() == 1)return 1;
+        
+        while(right < S.length() ){
+
+            while(visited[S.charAt(right)] == true){
+                visited[S.charAt(left)] = false;
+                left++;
+            }
+            
+            //if not visited
+            
+            visited[S.charAt(right)] = true; //true means usko visited banadiya
+            
+            maxlength = Math.max(maxlength, right-left+1);
+            
+            right++;
+        }
+        
+        return maxlength;
+        
+    }
+}
